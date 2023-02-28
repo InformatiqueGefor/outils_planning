@@ -32,3 +32,6 @@ Pour la base de données voici les configurations possible selon le gestionnaire
 ## Documentation générale du projet
 
 Voir la section docs pour avoir le MCD du projet
+
+Liens vers le deploiement avec symfony
+https://symfony.com/doc/current/deployment.html
