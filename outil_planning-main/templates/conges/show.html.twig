@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Congés{% endblock %}
+
+{% block body %}
+    <h1>Congés</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ conge.id }}</td>
+            </tr>
+            <tr>
+                <th>Start</th>
+                <td>{{ conge.start ? conge.start|date('d-m-Y') : '' }}</td>
+            </tr>
+            <tr>
+                <th>End</th>
+                <td>{{ conge.end ? conge.end|date('d-m-Y') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Session</th>
+                <td>{{ conge.session.name}}</td>
+            </tr>
+            <tr>
+                <th>CreatedAt</th>
+                <td>{{ conge.createdAt ? conge.createdAt|date('d-m-Y') : '' }}</td>
+            </tr>
+            <tr>
+                <th>UpdatedAt</th>
+                <td>{{ conge.updatedAt ? conge.updatedAt|date('d-m-Y') : '' }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_conges_index') }}">Retour à la liste</a>
+
+    <a href="{{ path('app_conges_edit', {'id': conge.id}) }}">éditer</a>
+
+    {{ include('conges/_delete_form.html.twig') }}
+{% endblock %}

@@ -1,0 +1,119 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Planning
+{% endblock %}
+
+{% block body %}
+      <h1 class="m-0 p-1">Calendrier de formation</h1>
+      <div>
+        <ul class="information d-flex flex-row justify-content-between p-1 m-0">
+          <li> {{ session.formation.name }} </li>
+          <li>Session : {{ session.name }}</li>
+          <li>Fiche RNCP n°: {{ session.formation.rncp }} </li>
+          <li>FORMACODE: {{ session.formation.formaCode }} </li>
+          <li>Code CPF: {{ session.formation.codeCpf }} </li>
+        </ul>
+        <ul class="information d-flex flex-row justify-content-between p-1 m-0">
+          <li>Dates de formation : du {{ session.start|date("d-m-Y") }} au {{ session.end|date("d-m-Y") }} </li>
+          <ul>
+            {% for stage in session.stages %}
+            <li> {{stage.name }} : {{ stage.start|date("d-m-Y") }} - {{ stage.end|date("d-m-Y") }}</li>
+            {% endfor %}
+          </ul>
+          <ul>
+            {% for conge in session.conges %}
+            <li> Congés : {{ conge.start|date("d-m-Y") }} - {{ conge.end|date("d-m-Y") }}</li>
+            {% endfor %}
+          </ul>
+          <ul>
+            {% for examen in session.examens %}
+            <li> Examens : {{ examen.start|date("d-m-Y") }} - {{ examen.end|date("d-m-Y") }}</li>
+            {% endfor %}
+          </ul>
+          <ul>
+            <li>Théorie: {{ session.theorieHours}} </li>
+            <li>Stage: {{ session.stageHours}}</li>
+            <li>Total: {{ session.totalHours}}</li>
+          </ul>
+        </ul>
+      </div>
+        <div class="container d-flex  calendar__year">
+          {% for month in sessionMonth %}
+            <table class="table calendar__year-month">
+              <thead>
+                <tr>
+                  <th scope="col" class="p-1 month">{{ month.mois }}</th>
+                </tr>
+              </thead>
+              <tbody>
+              {% set schoolHours = 0 %}
+              {% set stageHours = 0 %}
+                <tr
+                  scope="d-flex p-1">
+                  {# Le premier jour du mois #}
+      
+                  {% set start = month.start|date('N') -1 %}
+                  {# Boucle pour afficher tous les jours #}
+                  {% for i in 1..(month.allDays) %}
+                    {% set day = month.days[start] %}
+                    {% if start == 6 %}
+                      {% set start = 0 %}
+                    {% else %}
+                      {% set start = start + 1 %}
+                    {% endif %}
+                    {% set theDay = ((i < 10) ? '0' : '' ) ~ i ~ ' ' ~ month.mois %}
+                    {% set theDayOff = ((i < 10) ? '0' : '' ) ~ i ~ month.date %}
+                    <th class="{{ (theDay in congesDays) ? 'conges_days' : '' }} {{ (theDay in examensDays) ? 'examens_days' : '' }} {{ (theDayOff in daysOff|keys) ? 'days_off_color' : '' }} {{ (day in weekend) ? 'days_off_color' : '' }} days d-flex p-0 justify-content-between">
+                      <div class="calendar__year-days">
+                        {{ day|first }}
+                        {{ i }}
+                      </div>
+                      <div>
+                      {% if theDayOff in hours|keys %}
+                        {% set schoolHours = schoolHours + hours[theDayOff] %}
+                        {{ hours[theDayOff] }}
+                      {% endif %}
+                      </div>
+                      <div class="px-2 calendar__studing-place {{ (theDayOff in stagesDays) ? 'stages_days' : '' }}">
+                        {% if theDayOff in daysOff|keys %}
+                        {{ daysOff[theDayOff] }}
+                        {% endif %}
+                        {% if theDayOff in stagesDays %}
+                          {{ (day in weekend) ? ' ' : '7' }}
+                          {% set stageHours = stageHours + 7 %}
+                        {% endif %}
+                        {% if theDay in examensDays %}
+                          {{ (day in weekend) ? ' ' : 'Examens' }}
+                        {% endif %}
+                      </div>
+                    </th>
+                  {% endfor %}
+                  </tr>
+                </tr>
+                 <tfoot>
+                    <tr scope="">
+                      <th class="d-flex p-1 justify-content-between align-items-center calendar__year-totals">
+                        <div>total : </div>
+                        <div> {{ schoolHours }} </div>
+                        <div class="px-2 stages_days"> {{ stageHours }} </div>
+                      </th>
+                  </tfoot>
+              </tbody>
+            </table>
+          {% endfor %}
+        </div>
+        <div class="legend">
+        <ul class="legend__list d-flex flex-row justify-content-between p-1 m-0">
+          <li> <span class="days_off_color"></span> WE et Jours fériés</li>
+          <li> <span class="conges_days"></span>Congés </li>
+          <li> <span class="examens_days"></span>Examens </li>
+          <li> <span class="stages_days"></span>Stages </li>
+        </ul>
+        </div>
+      <footer>
+				<img src="{{ asset('image/logo_Groupe-GEFOR.jpg') }}" class="iimg-fluid" alt="...">
+				<p>
+					Groupe GEFOR - 7 rue du Louvre 75001 PARIS - 01.55.35.00.20 - www.gefor.com
+				</p>
+			</footer>
+{% endblock %}

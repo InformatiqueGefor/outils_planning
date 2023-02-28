@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Les Formations{% endblock %}
+
+{% block body %}
+    <h1>Toutes les formations</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nom</th>
+                <th>Rncp</th>
+                <th>FormaCode</th>
+                <th>CodeCpf</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for formation in formations %}
+            <tr>
+                <td>{{ formation.id }}</td>
+                <td>{{ formation.name }}</td>
+                <td>{{ formation.rncp }}</td>
+                <td>{{ formation.formaCode }}</td>
+                <td>{{ formation.codeCpf }}</td>
+                <td>
+                    <a href="{{ path('app_formation_show', {'id': formation.id}) }}">Voir</a>
+                    <a href="{{ path('app_formation_edit', {'id': formation.id}) }}">éditer</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="8">Pas de formations</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_formation_new') }}">Nouvelle formation</a>
+{% endblock %}

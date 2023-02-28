@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Les congés{% endblock %}
+
+{% block body %}
+    <h1>Les dates de congés</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Début</th>
+                <th>Fin</th>
+                <th>Session</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for conge in conges %}
+            <tr>
+                <td>{{ conge.id }}</td>
+                <td>{{ conge.start ? conge.start|date('d-m-Y') : '' }}</td>
+                <td>{{ conge.end ? conge.end|date('d-m-Y') : '' }}</td>
+                <td>{{ conge.session.name}}</td>
+                <td>
+                    <a href="{{ path('app_conges_show', {'id': conge.id}) }}">voir</a>
+                    <a href="{{ path('app_conges_edit', {'id': conge.id}) }}">éditer</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="6">Pas de congés</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_conges_new') }}">Nouvelles dates de congés</a>
+{% endblock %}

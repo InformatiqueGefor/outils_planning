@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Nouveau Stage{% endblock %}
+
+{% block body %}
+    <h1>Créer un nouveau stage</h1>
+
+    {{ include('stage/_form.html.twig') }}
+
+    <a href="{{ path('app_stage_index') }}">Retour à la liste</a>
+{% endblock %}

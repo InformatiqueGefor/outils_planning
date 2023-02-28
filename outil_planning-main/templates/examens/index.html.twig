@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Les Examens
+{% endblock %}
+
+{% block body %}
+	<h1>Tous les examens</h1>
+
+	<table class="table">
+		<thead>
+			<tr>
+				<th>Id</th>
+				<th>Début</th>
+				<th>Fin</th>
+				<th>Session</th>
+				<th>actions</th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for examen in examens %}
+				<tr>
+					<td>{{ examen.id }}</td>
+					<td>{{ examen.start ? examen.start|date('d-m-Y') : '' }}</td>
+					<td>{{ examen.end ? examen.end|date('d-m-Y') : '' }}</td>
+					<td>{{ examen.session.name }}</td>
+					<td>
+						<a href="{{ path('app_examens_show', {'id': examen.id}) }}">voir</a>
+						<a href="{{ path('app_examens_edit', {'id': examen.id}) }}">éditer</a>
+					</td>
+				</tr>
+			{% else %}
+				<tr>
+					<td colspan="6">pas d'examens</td>
+				</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+
+	<a href="{{ path('app_examens_new') }}">Nouveaux examens</a>
+{% endblock %}

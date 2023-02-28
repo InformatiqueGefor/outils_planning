@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Nouveaux congés{% endblock %}
+
+{% block body %}
+    <h1>Nouveaux congés</h1>
+
+    {{ include('conges/_form.html.twig') }}
+
+    <a href="{{ path('app_conges_index') }}">Retour à la liste</a>
+{% endblock %}

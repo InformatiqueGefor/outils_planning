@@ -1,0 +1,55 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Session
+{% endblock %}
+
+{% block body %}
+	<h1>Session</h1>
+
+	<table class="table">
+		<tbody>
+			<tr>
+				<th>Id</th>
+				<td>{{ session.id }}</td>
+			</tr>
+			<tr>
+				<th>Nom</th>
+				<td>{{ session.name }}</td>
+			</tr>
+			<tr>
+				<th>Début</th>
+				<td>{{ session.start ? session.start|date('d-m-Y') : '' }}</td>
+			</tr>
+			<tr>
+				<th>Fin</th>
+				<td>{{ session.end ? session.end|date('d-m-Y') : '' }}</td>
+			</tr>
+			<tr>
+				<th>Heures théoriques</th>
+				<td>{{ session.theorieHours }}</td>
+			</tr>
+			<tr>
+				<th>Heures de stages</th>
+				<td>{{ session.stageHours }}</td>
+			</tr>
+			<tr>
+				<th>Total d'heures</th>
+				<td>{{ session.totalHours }}</td>
+			</tr>
+			<tr>
+				<th>Crée le
+				</th>
+				<td>{{ session.createdAt ? session.createdAt|date('d-m-Y') : '' }}</td>
+			</tr>
+			<tr>
+				<th>Mise à jour le</th>
+				<td>{{ session.updatedAt ? session.updatedAt|date('d-m-Y') : '' }}</td>
+			</tr>
+		</tbody>
+	</table>
+
+	<a href="{{ path('app_session_index') }}">Retour à la liste</a>
+	<a href="{{ path('app_session_edit', {'id': session.id}) }}">éditer</a>
+
+	{{ include('session/_delete_form.html.twig') }}
+{% endblock %}

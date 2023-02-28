@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Les stages{% endblock %}
+
+{% block body %}
+    <h1>Les dates de stages</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nom</th>
+                <th>Début</th>
+                <th>Fin</th>
+                <th>Session</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for stage in stages %}
+            <tr>
+                <td>{{ stage.id }}</td>
+                <td>{{ stage.name }}</td>
+                <td>{{ stage.start ? stage.start|date('d-m-Y') : '' }}</td>
+                <td>{{ stage.end ? stage.end|date('d-m-Y') : '' }}</td>
+                <td>{{ stage.session.name}}</td>
+                <td>
+                    <a href="{{ path('app_stage_show', {'id': stage.id}) }}">voir</a>
+                    <a href="{{ path('app_stage_edit', {'id': stage.id}) }}">éditer</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="7">Pas de stages</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_stage_new') }}">Nouveaux stages</a>
+{% endblock %}

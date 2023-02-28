@@ -1,0 +1,100 @@
+body {
+  max-height: 90vh;
+  background-color: white;
+}
+h1 {
+  font-size: 1.2em;
+}
+li {
+  font-size: 0.7em;
+  list-style: none;
+}
+th.month {
+  max-height: 40px;
+  text-align: center;
+  vertical-align: middle;
+  font-size: 0.6em;
+  background-color: rgb(87, 161, 230);
+  color: white;
+}
+.days {
+  font-size: 0.6em;
+}
+th.days_off_color {
+  background-color: rgb(190, 225, 248);
+}
+th.conges_days {
+  background-color: rgb(235, 44, 155);
+}
+th.examens_days {
+  background-color: rgb(113, 214, 73);
+}
+div.stages_days {
+  background-color: rgb(229, 233, 15);
+}
+li > span {
+  display: inline-block;
+  background-color: black;
+  height: 10px;
+  width: 20px;
+}
+span.days_off_color {
+  background-color: rgb(190, 225, 248);
+}
+span.conges_days {
+  background-color: rgb(235, 44, 155);
+}
+span.examens_days {
+  background-color: rgb(113, 214, 73);
+}
+span.stages_days {
+  background-color: rgb(229, 233, 15);
+}
+div.calendar__year-days {
+  width: 25px;
+}
+th.calendar__year-totals {
+  padding-right: 0 2px 0 0;
+  height: 25px;
+  font-size: 0.6em;
+}
+footer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding: 10px 0 10px 0;
+  font-size: 0.7em;
+  width: 100%;
+  /* position: absolute;
+  bottom: 0; */
+}
+footer > img {
+  padding-right: 20px;
+  height: 40px;
+  width: 200px;
+}
+footer >p {
+  margin-bottom: 0;
+  margin-top: 20px;
+}
+
+form {
+  max-width: 50vh;
+}
+.form-control {
+  max-width: 400px;
+  max-height: 28px;
+}
+.form-select {
+  padding: 4px 20px 4px 8px;
+  max-height: 28px;
+}
+.input-group, select {
+  max-width: 400px;
+}
+.mb-3 {
+  margin-bottom: 5px!important;
+}
+.form-label {
+  margin-bottom: 5px;
+}

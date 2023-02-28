@@ -1,0 +1,54 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Les Sessions{% endblock %}
+
+{% block body %}
+    <h1>Toutes les sessions</h1>
+
+    <table class="table ">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nom</th>
+                <th>Début</th>
+                <th>Fin</th>
+                <th>Heures Théoriques</th>
+                <th>Heures de Stages</th>
+                <th>Total d'heures</th>
+                <th>Formation</th>
+                <th>actions</th>
+                <th>Ajout de</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for session in sessions %}
+            <tr>
+                <td>{{ session.id }}</td>
+                <td>{{ session.name }}</td>
+                <td>{{ session.start ? session.start|date('d-m-Y') : '' }}</td>
+                <td>{{ session.end ? session.end|date('d-m-Y') : '' }}</td>
+                <td>{{ session.theorieHours }}</td>
+                <td>{{ session.stageHours }}</td>
+                <td>{{ session.totalHours }}</td>
+                <td>{{ session.formation.name }}</td>
+                <td>
+                    <a href="{{ path('app_session_show', {'id': session.id}) }}">voir</a>
+                    <a href="{{ path('app_planning', {'id': session.id}) }}">planning</a>
+                    <a href="{{ path('app_session_edit', {'id': session.id}) }}">éditer</a>
+                </td>
+                <td>
+                    <a href="{{ path('app_stage_new') }}">Stages</a>
+                    <a href="{{ path('app_conges_new')}}">Congés</a>
+                    <a href="{{ path('app_examens_new') }}">Examens</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="10">Pas de session trouvées</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_session_new') }}">Nouvelle Session</a>
+{% endblock %}

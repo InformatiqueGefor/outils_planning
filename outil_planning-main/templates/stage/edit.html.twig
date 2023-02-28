@@ -1,0 +1,10 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Editer un Stage{% endblock %}
+
+{% block body %}
+    <h1>Editer le Stage</h1>
+    <a href="{{ path('app_stage_index') }}">Retour à la liste</a>
+    {{ include('stage/_form.html.twig', {'button_label': 'Mettre à jour'}) }}
+    {{ include('stage/_delete_form.html.twig') }}
+{% endblock %}

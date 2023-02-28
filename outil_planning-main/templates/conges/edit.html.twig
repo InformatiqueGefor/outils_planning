@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edition de congés{% endblock %}
+
+{% block body %}
+    <h1>Edition des congés</h1>
+    <a href="{{ path('app_conges_index') }}">Retour à la liste</a>
+    {{ include('conges/_form.html.twig', {'button_label': 'Mettre à jour'}) }}
+
+    {{ include('conges/_delete_form.html.twig') }}
+{% endblock %}
